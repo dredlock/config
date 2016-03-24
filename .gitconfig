@@ -1,6 +1,6 @@
 # See http://michaelwales.com/articles/make-gitconfig-work-for-you/
 [user]
-	email = fred.j.lock@gmail.com
+	email = webmaster@fredlock.io
 	name = Fred Lock
 [credential]
 	helper = cache --timeout=43200
