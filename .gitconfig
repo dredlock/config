@@ -96,8 +96,11 @@
 [url "https://gohealthcast.visualstudio.com/DefaultCollection/Dev/Europa%20Team/_git/"]
     insteadOf = hci:
 # example: git clone flock:FJL.etc
-[url "https://flock.visualstudio.com/DefaultCollection/FJL/_git/"]
+[url "https://flock.visualstudio.com/DefaultCollection/_git/"]
     insteadOf = flock:
+# example: git clone flock:FJL.etc
+[url "https://flock.visualstudio.com/DefaultCollection/FJL/_git/"]
+    insteadOf = fjl:
 # example: git clone dredlock:config
 [url "https://github.com/dredlock/"]
     insteadOf = dredlock:
