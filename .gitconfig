@@ -92,9 +92,12 @@
     insteadOf = gh:
 [url "https://gist.github.com/"]
     insteadOf = gist:
-# example: git clone hci:Juno
-[url "https://gohealthcast.visualstudio.com/DefaultCollection/Dev/Europa%20Team/_git/"]
-    insteadOf = hci:
+# example: git clone hci-dev1:juno
+[url "https://gohealthcast.visualstudio.com/DefaultCollection/Dev/_git/"]
+    insteadOf = hci-dev1:
+# example: git clone hci-dev2:mint
+[url "https://gohealthcast.visualstudio.com/DefaultCollection/Dev2/_git/"]
+    insteadOf = hci-dev2:
 # example: git clone flock:FJL.etc
 [url "https://flock.visualstudio.com/DefaultCollection/_git/"]
     insteadOf = flock:
