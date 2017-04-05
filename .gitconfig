@@ -93,10 +93,10 @@
 [url "https://gist.github.com/"]
     insteadOf = gist:
 # example: git clone hci-dev1:juno
-[url "https://gohealthcast.visualstudio.com/DefaultCollection/Dev/_git/"]
+[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev/_git/"]
     insteadOf = hci-dev1:
 # example: git clone hci-dev2:mint
-[url "https://gohealthcast.visualstudio.com/DefaultCollection/Dev2/_git/"]
+[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev2/_git/"]
     insteadOf = hci-dev2:
 # example: git clone flock:FJL.etc
 [url "https://flock.visualstudio.com/DefaultCollection/_git/"]
