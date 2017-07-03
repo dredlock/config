@@ -83,7 +83,7 @@
     mnemonicprefix = true
 [merge]
     log = true
-    ff = false
+    ff = true
 [push]
     default = simple
 [url "https://bitbucket.org/"]
