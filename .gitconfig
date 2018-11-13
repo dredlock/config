@@ -1,64 +1,86 @@
 # See http://michaelwales.com/articles/make-gitconfig-work-for-you/
 [user]
-	email = webmaster@fredlock.io
-	name = Fred Lock
+    email = flock@idauto.net
+    name = Fred Lock
+# example: git clone bbhc:mint
+[url "https://FLock@stash.identitymgmt.net/scm/hc/"]
+    insteadOf = bbhc:
+# example: git clone gh:myrepo
+[url "https://github.com/"]
+    insteadOf = gh:
+# example: git clone gist:another-repo
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+# example: git clone hci-dev1:juno
+[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev/_git/"]
+    insteadOf = hci-dev1:
+# example: git clone hci-dev2:mint
+[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev2/_git/"]
+    insteadOf = hci-dev2:
+# example: git clone flock:FJL.etc
+[url "https://flock.visualstudio.com/DefaultCollection/_git/"]
+    insteadOf = flock:
+# example: git clone dredlock:config
+[url "https://github.com/dredlock/"]
+    insteadOf = dredlock:
 [credential]
-	helper = cache --timeout=43200
+    helper = cache --timeout=43200
 [alias]
-        ci = commit
-        st = status
-        co = checkout
-    	br = branch -av
-        lg = log -p
-        stage = add
-    	unstage = reset HEAD --
-        plog = log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'
-        graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
-        timmeh = commit -am'TIMMEH\\!'
-        subs = submodule foreach git pull origin master¬
-        local = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --first-parent --no-merges
-		ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-        ll = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-
-	ddremove = !git r && git add . --all
-    	aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
-    	all = add . --all
-    	amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
-    	brname = !git branch | grep "^*" | awk '{ print $2 }'
-    	brdel = branch -D
-    	changes = "!f() { git log --pretty=format:'* %s' $1..$2; }; f"
-    	churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
-    	details = log -n1 -p --format=fuller
-    	export = archive -o latest.tar.gz -9 --prefix=latest/
-    	g = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    	in = pull --dry-run
-    	l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
-    	out = log --branches --not --remotes
-    	r = !git ls-files -z --deleted | xargs -0 git rm
-    	root = rev-parse --show-toplevel
-    	subup = submodule update --init
-    	tags = tag -l
-    	this = !git init && git add . && git commit -m \"Initial commit.\"
-    	trim = !git reflog expire --expire=now --all && git gc --prune=now
+    ci = commit
+    st = status
+    co = checkout
+    br = branch -av
+    lg = log -p
+    stage = add
+    unstage = reset HEAD --
+    plog = log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+    timmeh = commit -am'TIMMEH\\!'
+    subs = submodule foreach git pull origin master¬
+    local = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --first-parent --no-merges
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ddremove = !git r && git add . --all
+    aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+    all = add . --all
+    amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+    brname = !git branch | grep "^*" | awk '{ print $2 }'
+    brDelete = branch -D #Delete the named branch even if it has not yet been merged
+    brdel = branch -d #Delete the named branch
+    brv = branch -v
+    brmerged = branch --merged # show all the branches that have been merged into the current branch
+    brnomerged = branch --no-merged # show all the branches that have not been merged into the current branch
+    changes = "!f() { git log --pretty=format:'* %s' $1..$2; }; f"
+    churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+    details = log -n1 -p --format=fuller
+    export = archive -o latest.tar.gz -9 --prefix=latest/
+    g = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    in = pull --dry-run
+    l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
+    out = log --branches --not --remotes
+    r = !git ls-files -z --deleted | xargs -0 git rm
+    root = rev-parse --show-toplevel
+    subup = submodule update --init
+    tags = tag -l
+    this = !git init && git add . && git commit -m \"Initial commit.\"
+    trim = !git reflog expire --expire=now --all && git gc --prune=now
 [color]
-        ui = auto
+    ui = auto
 [color "branch"]
-        current = yellow reverse
-        local = yellow
-        remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "diff"]
-        meta = yellow bold
-        frag = magenta bold
-        old = red bold
-        new = green bold
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
 [color "status"]
-        added = yellow
-        changed = green
-        untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 [push]
-        default = current
-[core]
-	excludesfile = ~/.gitignore_global
+    default = current
 [color]
     ui = true
 [color "branch"]
@@ -77,33 +99,24 @@
 [core]
     autocrlf = input
     compression = 9
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore
     filemode = false
 [diff]
     mnemonicprefix = true
+    tool = vimdiff
 [merge]
     log = true
     ff = true
+    conflictstyle = diff3
+    tool = vimdiff
 [push]
     default = simple
-[url "https://bitbucket.org/"]
-    insteadOf = bb:
-[url "https://github.com/"]
-    insteadOf = gh:
-[url "https://gist.github.com/"]
-    insteadOf = gist:
-# example: git clone hci-dev1:juno
-[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev/_git/"]
-    insteadOf = hci-dev1:
-# example: git clone hci-dev2:mint
-[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev2/_git/"]
-    insteadOf = hci-dev2:
-# example: git clone flock:FJL.etc
-[url "https://flock.visualstudio.com/DefaultCollection/_git/"]
-    insteadOf = flock:
-# example: git clone flock:FJL.etc
-[url "https://flock.visualstudio.com/DefaultCollection/FJL/_git/"]
-    insteadOf = fjl:
-# example: git clone dredlock:config
-[url "https://github.com/dredlock/"]
-    insteadOf = dredlock:
+[mergetool]
+    prompt = false
+[credential "https://source.developers.google.com"]
+    useHttpPath = true
+[difftool "sourcetree"]
+    cmd = '' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+    cmd = "'' "
+    trustExitCode = true
