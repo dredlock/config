@@ -26,44 +26,45 @@
 [credential]
     helper = cache --timeout=43200
 [alias]
-    ci = commit
-    st = status
-    co = checkout
-    br = branch -av
-    lg = log -p
-    stage = add
-    unstage = reset HEAD --
-    plog = log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'
-    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
-    timmeh = commit -am'TIMMEH\\!'
-    subs = submodule foreach git pull origin master¬
-    local = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --first-parent --no-merges
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ll = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ddremove = !git r && git add . --all
     aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
     all = add . --all
     amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+    br = branch -av
+    brdelete = branch -D # delete the named branch even if it has not yet been merged
     brname = !git branch | grep "^*" | awk '{ print $2 }'
-    brDelete = branch -D #Delete the named branch even if it has not yet been merged
-    brdel = branch -d #Delete the named branch
+    brdel = branch -d # delete the named branch
     brv = branch -v
     brmerged = branch --merged # show all the branches that have been merged into the current branch
     brnomerged = branch --no-merged # show all the branches that have not been merged into the current branch
     changes = "!f() { git log --pretty=format:'* %s' $1..$2; }; f"
     churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+    ci = commit
+    co = checkout
+    ddremove = !git r && git add . --all
     details = log -n1 -p --format=fuller
     export = archive -o latest.tar.gz -9 --prefix=latest/
     g = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
     in = pull --dry-run
     l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
+    lg = log -p
+    ll = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    local = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --first-parent --no-merges
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
     out = log --branches --not --remotes
+    plog = log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'
+    prune = fetch -p # remove local tracking branches that are no longer on the remote
     r = !git ls-files -z --deleted | xargs -0 git rm
     root = rev-parse --show-toplevel
+    st = status
+    stage = add
+    subs = submodule foreach git pull origin master¬
     subup = submodule update --init
     tags = tag -l
     this = !git init && git add . && git commit -m \"Initial commit.\"
+    timmeh = commit -am'TIMMEH\\!'
     trim = !git reflog expire --expire=now --all && git gc --prune=now
+    unstage = reset HEAD --
 [color]
     ui = auto
 [color "branch"]
