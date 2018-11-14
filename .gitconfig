@@ -30,12 +30,15 @@
     all = add . --all
     amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
     br = branch -av
-    brdelete = branch -D # delete the named branch even if it has not yet been merged
+    # delete the named branch even if it has not yet been merged
+    brdelete = branch -D
     brname = !git branch | grep "^*" | awk '{ print $2 }'
     brdel = branch -d # delete the named branch
     brv = branch -v
-    brmerged = branch --merged # show all the branches that have been merged into the current branch
-    brnomerged = branch --no-merged # show all the branches that have not been merged into the current branch
+    # show all the branches that have been merged into the current branch
+    brmerged = branch --merged
+    # show all the branches that have not been merged into the current branch
+    brnomerged = branch --no-merged
     changes = "!f() { git log --pretty=format:'* %s' $1..$2; }; f"
     churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
     ci = commit
@@ -53,7 +56,8 @@
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
     out = log --branches --not --remotes
     plog = log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'
-    prune = remote prune origin # remove local tracking branches that are no longer on the remote
+    # remove local tracking branches that are no longer on the remote
+    prune = remote prune origin
     r = !git ls-files -z --deleted | xargs -0 git rm
     root = rev-parse --show-toplevel
     st = status
