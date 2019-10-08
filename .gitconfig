@@ -2,6 +2,9 @@
 [user]
     email = flock@idauto.net
     name = Fred Lock
+# example: git clone bbri:rapididentity
+[url "https://FLock@stash.identitymgmt.net/scm/ri/"]
+    insteadOf = bbri:
 # example: git clone bbhc:mint
 [url "https://FLock@stash.identitymgmt.net/scm/hc/"]
     insteadOf = bbhc:
@@ -30,15 +33,23 @@
     all = add . --all
     amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
     br = branch -av
-    # delete the named branch even if it has not yet been merged
+
+    # Delete the specified branch even if it has not been merged
     brdelete = branch -D
+    
     brname = !git branch | grep "^*" | awk '{ print $2 }'
-    brdel = branch -d # delete the named branch
+    
+    # Delete the specified branch
+    brdel = branch -d
+	
     brv = branch -v
-    # show all the branches that have been merged into the current branch
+    
+    # Show all the branches that have been merged into the current branch
     brmerged = branch --merged
-    # show all the branches that have not been merged into the current branch
+	
+    # Show all the branches that have not been merged into the current branch
     brnomerged = branch --no-merged
+
     changes = "!f() { git log --pretty=format:'* %s' $1..$2; }; f"
     churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
     ci = commit
@@ -56,8 +67,10 @@
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
     out = log --branches --not --remotes
     plog = log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'
-    # remove local tracking branches that are no longer on the remote
-    prune = remote prune origin
+	
+    # Remove all remote tracking branches for which no corresponding branch exists on the remote repo
+    prune-remotes = remote prune origin
+	
     r = !git ls-files -z --deleted | xargs -0 git rm
     root = rev-parse --show-toplevel
     st = status
@@ -69,6 +82,9 @@
     timmeh = commit -am'TIMMEH\\!'
     trim = !git reflog expire --expire=now --all && git gc --prune=now
     unstage = reset HEAD --
+    ec = config --global -e
+    cob = checkout -b
+    cm = !git add -A && git commit -m
 [color]
     ui = auto
 [color "branch"]
@@ -119,9 +135,11 @@
 [mergetool]
     prompt = false
 [credential "https://source.developers.google.com"]
-    useHttpPath = true
+	useHttpPath = true
 [difftool "sourcetree"]
-    cmd = '' \"$LOCAL\" \"$REMOTE\"
+	cmd = '' \"$LOCAL\" \"$REMOTE\"
 [mergetool "sourcetree"]
-    cmd = "'' "
-    trustExitCode = true
+	cmd = "'' "
+	trustExitCode = true
+[gui]
+	recentrepo = D:/Users/flock/Documents/Projects/lynx
