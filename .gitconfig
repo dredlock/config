@@ -1,7 +1,7 @@
 # See http://michaelwales.com/articles/make-gitconfig-work-for-you/
 [user]
     name = Fred Lock
-    email = fred.j.lock@gmail.com
+    email = noreply
 # repository aliases
 [url "https://flock.visualstudio.com/DefaultCollection/_git/"]
     insteadOf = flock:
