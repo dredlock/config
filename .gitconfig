@@ -1,89 +1,102 @@
 # See http://michaelwales.com/articles/make-gitconfig-work-for-you/
 [user]
-    email = flock@idauto.net
     name = Fred Lock
-# example: git clone bbri:rapididentity
-[url "https://FLock@stash.identitymgmt.net/scm/ri/"]
-    insteadOf = bbri:
-# example: git clone bbhc:mint
-[url "https://FLock@stash.identitymgmt.net/scm/hc/"]
-    insteadOf = bbhc:
-# example: git clone gh:myrepo
-[url "https://github.com/"]
-    insteadOf = gh:
-# example: git clone gist:another-repo
-[url "https://gist.github.com/"]
-    insteadOf = gist:
-# example: git clone hci-dev1:juno
-[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev/_git/"]
-    insteadOf = hci-dev1:
-# example: git clone hci-dev2:mint
-[url "ssh://gohealthcast@gohealthcast.visualstudio.com:22/DefaultCollection/Dev2/_git/"]
-    insteadOf = hci-dev2:
-# example: git clone flock:FJL.etc
+    email = fred.j.lock@gmail.com
+# repository aliases
 [url "https://flock.visualstudio.com/DefaultCollection/_git/"]
     insteadOf = flock:
-# example: git clone dredlock:config
+# example: git clone flock:FJL.etc
 [url "https://github.com/dredlock/"]
     insteadOf = dredlock:
+# example: git clone dredlock:config
 [credential]
     helper = cache --timeout=43200
 [alias]
+    # print a list of all aliases
     aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+    #
     all = add . --all
+    #
     amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+    # show all branches, both remote and local
     br = branch -av
-
     # Delete the specified branch even if it has not been merged
     brdelete = branch -D
-    
+    #
     brname = !git branch | grep "^*" | awk '{ print $2 }'
-    
     # Delete the specified branch
     brdel = branch -d
-	
+    #
     brv = branch -v
-    
     # Show all the branches that have been merged into the current branch
     brmerged = branch --merged
-	
     # Show all the branches that have not been merged into the current branch
     brnomerged = branch --no-merged
-
+    #
     changes = "!f() { git log --pretty=format:'* %s' $1..$2; }; f"
+    #
     churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+    #
     ci = commit
+    #
     co = checkout
+    #
     ddremove = !git r && git add . --all
+    #
     details = log -n1 -p --format=fuller
+    # discard the changes to the specified file: git discard myfile.txt
+    discard = checkout -- 
+    #
     export = archive -o latest.tar.gz -9 --prefix=latest/
+    #
     g = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    #
     graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+    #
     in = pull --dry-run
+    #
     l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
+    #
     lg = log -p
+    #
     ll = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    #
     local = log --numstat --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate  --first-parent --no-merges
+    #
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    #
     out = log --branches --not --remotes
+    #
     plog = log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'
-	
     # Remove all remote tracking branches for which no corresponding branch exists on the remote repo
     prune-remotes = remote prune origin
-	
+    #
     r = !git ls-files -z --deleted | xargs -0 git rm
+    #
     root = rev-parse --show-toplevel
+    #
     st = status
+    # add the specified file(s) to the files to be committed: git stage .
     stage = add
+    #
     subs = submodule foreach git pull origin master¬
+    #
     subup = submodule update --init
+    #
     tags = tag -l
+    #
     this = !git init && git add . && git commit -m \"Initial commit.\"
+    #
     timmeh = commit -am'TIMMEH\\!'
+    #
     trim = !git reflog expire --expire=now --all && git gc --prune=now
+    # unstage the specfied file: git unstage myfile.txt
     unstage = reset HEAD --
+    #
     ec = config --global -e
+    #
     cob = checkout -b
+    #
     cm = !git add -A && git commit -m
 [color]
     ui = auto

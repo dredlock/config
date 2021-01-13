@@ -5,6 +5,11 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# read in the aliases file if it exists
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
@@ -86,13 +91,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\] \[\033[33;1m\]\w\[\033[m\] (\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)) \$ "
-
-# my aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias clls='clear; ls -al'
-alias cls='clear'
-alias h='history'
 
 set -o vi
